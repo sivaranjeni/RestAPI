@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-09-25T19:58:15 SAST" name="Default suite" finished-at="2022-09-25T19:58:18 SAST" duration-ms="2809">
+    <groups>
+    </groups>
+    <test started-at="2022-09-25T19:58:15 SAST" name="Default test" finished-at="2022-09-25T19:58:18 SAST" duration-ms="2809">
+      <class name="com.qa.test.InvestecApiTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.qa.test.InvestecApiTest@7a419da4]" started-at="2022-09-25T19:58:15 SAST" name="setup" finished-at="2022-09-25T19:58:15 SAST" duration-ms="21" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="getApiTest()[pri:0, instance:com.qa.test.InvestecApiTest@7a419da4]" started-at="2022-09-25T19:58:15 SAST" name="getApiTest" finished-at="2022-09-25T19:58:18 SAST" duration-ms="2672" status="FAIL">
+          <exception class="com.jayway.jsonpath.PathNotFoundException">
+            <message>
+              <![CDATA[Expected to find an object with property ['results'] in path $ but found 'org.json.JSONObject'. This is not a json object according to the JsonProvider: 'com.jayway.jsonpath.spi.json.JsonSmartJsonProvider'.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.jayway.jsonpath.PathNotFoundException: Expected to find an object with property ['results'] in path $ but found 'org.json.JSONObject'. This is not a json object according to the JsonProvider: 'com.jayway.jsonpath.spi.json.JsonSmartJsonProvider'.
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.jayway.jsonpath.PathNotFoundException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getApiTest -->
+      </class> <!-- com.qa.test.InvestecApiTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

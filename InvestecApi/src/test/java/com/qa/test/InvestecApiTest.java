@@ -1,60 +1,79 @@
 package com.qa.test;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Phaser;
-
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.JsonPath;
 import com.qa.InvestecApi.InvestecApi;
 import com.qa.base.TestBase;
 import com.qa.util.TestUtil;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.matchers.JUnitMatchers.*;
-
-import static org.junit.Assert.assertThat;
-
 public class InvestecApiTest extends TestBase{
-	
-	TestBase TestBase;
-	String serviceurl;
-	String apiurl;
+	TestBase testBase;
+	String serviceUrl;
+	String apiUrl;
 	String url;
 	InvestecApi InvestecApi;
-	CloseableHttpResponse CloseableHttpResponse ;
-	
+	CloseableHttpResponse closebaleHttpResponse;
 	
 	
 	@BeforeMethod
-	
-	public void setup() {
+	public void setUp() throws ClientProtocolException, IOException{
+		testBase = new TestBase();
+		serviceUrl = prop.getProperty("URL");
+		apiUrl = prop.getProperty("serviceURL");
 		
-		TestBase = new TestBase();
-		serviceurl = prop.getProperty("URL");
-		apiurl = prop.getProperty("serviceURL");
-		url = serviceurl + apiurl;
+	    url = serviceUrl + apiUrl;
+		
 	}
-		
+	
 	@Test
-	public void getApiTest() throws ClientProtocolException, IOException {
+	public void getApiTest() throws ClientProtocolException, IOException{
+    
+		InvestecApi = new InvestecApi();
+		
+		closebaleHttpResponse = InvestecApi.get(url);
+		
+		//Json String:
+				String responseString = EntityUtils.toString(closebaleHttpResponse.getEntity(), "UTF-8");
+				
+				JSONObject responseJson = new JSONObject(responseString);
+				System.out.println("Response JSON from API---> "+ responseJson);
+				
+		//get the value from JSON ARRAY:
+				String skincolor  = TestUtil.getValueByJPath(responseJson, "/results[2]/skin_color");
+				System.out.println("skin_color of R2-D2 :"+skincolor);
+				
+				Assert.assertEquals(skincolor , "white, blue"); 
+				
+	}
+	
+}
+				
+		
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*//@Test
+	public void getApiTest1() throws ClientProtocolException, IOException {
 		
 	
 		InvestecApi = new InvestecApi();
 		
-		CloseableHttpResponse = InvestecApi.get(url);
+		closebaleHttpResponse = InvestecApi.get(url);
 		
 		//to get full string from the page we have to use entityutils class
 		
@@ -100,13 +119,13 @@ public class InvestecApiTest extends TestBase{
 //				
 //				System.out.println("skin_color of R2-D2 :"+skincolor);
 						
-				//Assert.assertEquals(skin_color , "white, blue"); 
+				//Assert.assertEquals(skin_color , "white, blue"); */
 				
-	}
+	
 		
 	
 	
-}
+
 	
 
 

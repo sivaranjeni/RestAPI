@@ -6,7 +6,7 @@
       <class name="com.qa.test.InvestecApiTest">
         <methods>
           <include name="getApiTest"/>
-          <include name="setup"/>
+          <include name="setUp"/>
         </methods>
       </class> <!-- com.qa.test.InvestecApiTest -->
     </classes>
